@@ -1,0 +1,73 @@
+.dialogItem__container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    &-avatar {
+        position: relative;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        margin: 5px 10px 5px 10px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+
+    }
+    &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        &__top {
+          display: flex;
+          b {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 6px;
+            width: 235px;
+            white-space: nowrap;
+          }
+          span {
+            opacity: 0.5;
+          }
+        }
+        &__bottom {
+            display: flex;
+            margin-right: 10px;
+            p {
+              opacity: 0.7;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              width: 250px;
+              height: 1.2em;
+              white-space: nowrap;
+            }
+            h6 {
+              background: #f56a00;
+              color: #fff;
+              font-weight: bold;
+              width: 100%;
+              min-width: 18px;
+              max-width: 18px;
+              height: 18px;
+              border-radius: 30px;
+              font-size: 11px;
+              text-align: center;
+              line-height: 17px;
+            }
+            
+          }
+    }
+}
+
+.dialogItem__container:hover {
+    background-color: #fff2e8;
+    cursor: pointer;
+}
+
+
+#dialogItem__container {
+    background-color: #fff2e8;
+}
