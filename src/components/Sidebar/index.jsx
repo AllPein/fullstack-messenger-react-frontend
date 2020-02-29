@@ -1,11 +1,10 @@
 import React from 'react'
-import { Icon, Button, Modal, Select, Input, Form, Divider } from 'antd';
-import {Dialogs} from '../index';
+import { Button, Input } from 'antd';
+import {Dialogs} from '../../containers/index';
 
 import './Sidebar.scss';
 
-const { Option } = Select;
-const { TextArea } = Input;
+
 
 const Sidebar = ({user}) => {
   return (
@@ -15,7 +14,6 @@ const Sidebar = ({user}) => {
         
       </div>
       <div className="chat__sidebar-dialogs">
-        <Input placeholder='Поиск..' size='large' prefix={<Icon type='team'  />}></Input>
         <Dialogs user={user} />
       </div>
     </div>

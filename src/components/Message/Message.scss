@@ -1,0 +1,75 @@
+.message__container{
+    $self: &;
+
+    &-content{
+        display: flex;
+        margin: 15px;
+        max-width: 440px;
+        position: relative;
+        align-items: flex-end;
+
+        &__avatar{
+            margin-bottom: 13px;
+        }
+        &__info{
+            margin-left: 10px;
+            max-width: inherit;
+            text-align: center;
+            min-width: 40px;
+            text-align: left;
+            &-text{
+                background: #ffffff;
+                border: 1px solid #dbdbdb;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.0220444);
+                border-radius: 12px 12px 12px 0px;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 12px;
+                word-break: break-word;  
+            }
+            &-time{
+                height: 20px;
+                font-size: 12px;
+                line-height: 14px;
+                margin-top: 10px;
+                color: #202020;
+                opacity: 0.4;
+            }
+        }
+    }
+    
+
+    
+
+    &-isme{
+        display: flex;
+        flex-direction: row-reverse;
+        #{$self}-content{
+            margin-right: 5px;
+            flex-direction: row-reverse;
+            
+            &__avatar{
+                margin-bottom: 13px;
+                margin-left: 5px;
+            }
+            
+            &__info{
+                &-text{
+                    background: #3674ff;
+                    color: #fff;
+                    box-shadow: 0px 5px 5px rgba(54, 116, 255, 0.196733);
+                    border-radius: 12px 12px 0px 12px;
+                    padding: 15px;
+                    margin-bottom: 8px;
+                }
+                &-time{
+                    text-align: right;
+                    margin-right: 10px;
+                }
+            }
+
+        }
+        
+    }
+}
+

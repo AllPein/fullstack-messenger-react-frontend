@@ -1,0 +1,48 @@
+.status__container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 73px;
+    &-avatar{
+        flex: 1;
+        margin-left: 20px;
+        margin-top: 10px;
+
+    }
+    &-info {
+        line-height: 20px;
+        margin-top: 10px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+
+        h2 {
+            font-size: 20px;
+        }
+        p {
+        }
+        p::before{
+            display: inline-block;
+            content: "";
+            width: 8px;
+            opacity: 1;
+            height: 8px;
+            border-radius: 30px;
+            margin-right: 4px;
+            background-color: #d3d3d3;
+        }
+
+        &-online::before {
+            background-color: #00c980 !important;
+        }
+    }
+
+    &-icon {
+        position: relative;
+        right: 20px;
+        top: 10px;
+        font-size: 30px;
+      
+    }
+}

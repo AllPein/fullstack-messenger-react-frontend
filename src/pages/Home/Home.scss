@@ -1,3 +1,9 @@
+.ant-divider {
+  margin: 0 !important; 
+}
+
+
+
 .chat {
   display: flex;
   height: 100%;
@@ -15,15 +21,36 @@
       margin-bottom: 20px;
     }
     &-dialogs{
-      height: calc(100% - 95px);
-
+      height: calc(100% - 60px);
       .dialogs {
         height: 100%;
         overflow-y: scroll;
+      width: 340px;
+
       }
+      
       .dialogs::-webkit-scrollbar{
         width: 0;
       }
     }
+
   }
+
+  &__dialog{
+    width: 100%;
+    
+  }
+
+  &__dialog{
+    height: calc(100% - 95px);
+    .messages{
+      height: 100%;
+      overflow-y: scroll;
+    }
+    .messages::-webkit-scrollbar{
+      width: 0;
+    }
+  }
+
 }
+

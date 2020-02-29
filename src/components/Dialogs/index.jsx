@@ -1,131 +1,33 @@
 import React from 'react'
 import './Dialogs.scss' 
 import { DialogItem } from "../index";
+import { Input, Empty } from 'antd';
+const Dialogs = ({user, dialogs, onInputChange, inputValue}) => {
 
-const Dialogs = ({user}) => {
-  const items = [
-    {
-      text: "asd",
-      username: "Sasha",
-      time: "14:42",
-      unRead: 2,
-
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    {
-      text: "sssssss",
-      username: "Kolya",
-      time: "11:20",
-      unRead: 0
-    },
-    
-    {
-      text: "fffffff",
-      username: "Arthur",
-      time: "14:42",
-      unRead: 0
-    },
-    {
-      text: "sssssssssssssss",
-      username: "Lesha",
-      time: "13:11",
-      unRead: 11
-    }
-
-  ]
   return (
     <div className='dialogs'>
-      { items.map(item => (
-        <DialogItem 
-        text={item.text}
-        username={item.username}
-        time={item.time}
-        unRead={item.unRead}
-        avatarColor={item.avatarColor}
-        user={user}
-        />
-      )) }
+      <Input.Search placeholder='Поиск..' onChange={e => onInputChange(e.target.value)} value={inputValue} size='large' />
+
+      { dialogs.length > 0 ? (
+          dialogs.map(item => (
+          <DialogItem 
+          text={item.text}
+          username={item.username}
+          time={item.time}
+          unRead={item.unRead}
+          avatarColor={item.avatarColor}
+          user={user}
+          />
+        )) 
+      )
+      :
+      (
+        <Empty  description='Ничего не найдено' />
+      )}
     </div>
     
   )
 }
  
-export default Dialogs
+export default Dialogs;
  

@@ -1,8 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Divider } from 'antd';
 
-import { Sidebar } from '../../containers/index'
+import { Sidebar, Messages } from '../../containers/index'
+import { StatusBar } from '../../components/index'
 import './Home.scss';
 
 const Home = props => {
@@ -13,8 +15,12 @@ const Home = props => {
     <section className="home">
       <div className="chat">
         <Sidebar  />
+
         {user && (
           <div className="chat__dialog">
+            <StatusBar />
+            <Divider  />
+            <Messages />
             <div className="chat__dialog-input">
             </div>
           </div>
