@@ -35,5 +35,5 @@ const Message = ({ isMe, text,  time, user}) => {
   )
 }
  
-export default Message
+export default Message;
  

@@ -1,112 +1,6 @@
 const initialState = {
-    dialogs: [
-        {
-          text: "asd",
-          username: "Sasha",
-          time: "14:42",
-          unRead: 2,
-    
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        {
-          text: "sssssss",
-          username: "Kolya",
-          time: "11:20",
-          unRead: 0
-        },
-        
-        {
-          text: "fffffff",
-          username: "Arthur",
-          time: "14:42",
-          unRead: 0
-        },
-        {
-          text: "sssssssssssssss",
-          username: "Lesha",
-          time: "13:11",
-          unRead: 11
-        }
-    
-      ],
-    
+    dialogs: [],
+    currentDialogId: null
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -117,6 +11,11 @@ export default (state = initialState, { type, payload }) => {
                 dialogs: payload,
                 
             };
+        case 'DIALOGS:SET_CURRENT_DIALOG_ID':
+            return {
+                ...state,
+                currentDialogId: payload
+            }
         default: 
             return state;
     }

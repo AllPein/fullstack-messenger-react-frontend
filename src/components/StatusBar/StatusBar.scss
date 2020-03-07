@@ -1,18 +1,17 @@
 .status__container {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     height: 73px;
+
     &-avatar{
-        flex: 1;
-        margin-left: 20px;
-        margin-top: 10px;
+        margin: 10px 0 0 20px;
 
     }
     &-info {
         line-height: 20px;
         margin-top: 10px;
-        flex: 1;
+        text-align: center;
         display: flex;
         flex-direction: column;
         margin-right: 20px;
@@ -20,8 +19,7 @@
         h2 {
             font-size: 20px;
         }
-        p {
-        }
+
         p::before{
             display: inline-block;
             content: "";
@@ -40,9 +38,7 @@
 
     &-icon {
         position: relative;
-        right: 20px;
-        top: 10px;
         font-size: 30px;
-      
+        margin: 15px 15px 0 0;
     }
 }

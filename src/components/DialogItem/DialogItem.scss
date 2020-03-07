@@ -1,7 +1,29 @@
+$black: #202020;
+$selected: #3674ff;
+
+.empty-box {
+  position: relative !important;
+  top: 20% !important;
+  left: 0% !important;
+}
+
 .dialogItem__container {
     display: flex;
     flex-direction: row;
-    margin-top: 5px;
+    color: $black;
+    padding: 5px 0 0 0;
+    &-unread {
+        background-color: #fff2e8;
+    }
+    &-selected{
+      background-color: $selected;
+      color: #fff !important;
+      transition: .5s;
+      .ant-divider {
+        display: none;
+      }
+    }
+   
     &-avatar {
         position: relative;
         flex: 0 0 40px;
@@ -41,7 +63,7 @@
               text-overflow: ellipsis;
               overflow: hidden;
               width: 250px;
-              height: 1.2em;
+              height: 1.4em;
               white-space: nowrap;
             }
             h6 {
@@ -63,11 +85,21 @@
 }
 
 .dialogItem__container:hover {
-    background-color: #fff2e8;
+    background-color: #4d7feb6b;
+    color: #fff;
     cursor: pointer;
+    transition: .2s;
+    .ant-divider {
+      display: none;
+    }
 }
 
-
-#dialogItem__container {
-    background-color: #fff2e8;
+.dialogItem__container-selected:hover {
+  .ant-divider {
+    display: none;
+  }
+  opacity: 0.9;
+  transition: .5s;
+  cursor: pointer;
 }
+

@@ -2,7 +2,11 @@
   margin: 0 !important; 
 }
 
-
+.ant-empty {
+  position: relative;
+  left: 25%;
+  padding-top: 35%;
+}
 
 .chat {
   display: flex;

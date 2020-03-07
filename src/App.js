@@ -23,7 +23,6 @@ const App = props => {
         </Switch>
       </div>
     );
-  
 };
 
 export default connect( state  => ({ loggedIn: state.user.loggedIn }))(App);
