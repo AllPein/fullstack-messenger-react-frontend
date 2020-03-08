@@ -2,6 +2,7 @@ import React, {  useEffect, useRef, useState } from 'react';
 import {Messages} from "../components/index";
 import { connect } from 'react-redux';
 import store from '../redux/store';
+import socket from '../socket';
 import {messagesActions} from '../redux/actions/index';
 
 const MessagesContainer = ({messages, dialogId, user}) => {
@@ -16,8 +17,12 @@ const MessagesContainer = ({messages, dialogId, user}) => {
     useEffect(() => {
         if (dialogId) {
             store.dispatch(messagesActions.fetchMessages(dialogId));
-        }
         
+        
+            socket.on("MESSAGES:NEW_MESSAGE", (data) => store.dispatch(messagesActions.addMessage(data)));
+
+            return () => socket.removeListener('SERVER:NEW_MESSAGE');
+        }
     }, [dialogId]);
 
 

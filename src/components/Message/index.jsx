@@ -2,6 +2,10 @@ import React from 'react'
 import { Avatar } from 'antd';
 import classNames from 'classnames';
 
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import ruLocale from 'date-fns/locale/ru';
+
+
 import './Message.scss';
 
 const Message = ({ isMe, text,  time, user}) => {
@@ -26,7 +30,7 @@ const Message = ({ isMe, text,  time, user}) => {
                     <p>{  text }</p>
                 </div>
                 <div className="message__container-content__info-time">
-                    <span>{ time }</span>
+                    <span>{ formatDistanceToNow(new Date(time),  {locale: ruLocale, addSuffix: true } ) }</span>
                 </div>
             </div>
         </div>

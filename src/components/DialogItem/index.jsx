@@ -1,12 +1,12 @@
 import React from 'react';
 import './DialogItem.scss'; 
 import { Link } from 'react-router-dom';
-
+import format from 'date-fns/format';
 import classNames  from 'classnames';
 
 import { Avatar, Divider } from 'antd';
 const DialogItem = props => {
-    const { text, partner, id, isRead, unRead, user, dialogId, currentDialogId } = props;
+    const { text, time, partner, id, isRead, unRead, user, dialogId, currentDialogId } = props;
     const st = {
         "marginTop": "2px",
         "marginBottom": "0px",
@@ -33,7 +33,7 @@ const DialogItem = props => {
             <div className="dialogItem__container-info">
                 <div className="dialogItem__container-info__top">
                     <b>{ partner.username }</b>
-                    <span>14:20</span>
+                    <span>{ format(new Date(time), 'HH:mm') }</span>
                 </div>
                 <div className="dialogItem__container-info__bottom">
                     <p>{  txt }</p>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Divider, Empty } from 'antd';
 
-import { Sidebar, Messages } from '../../containers/index'
+import { Sidebar, Messages, ChatInput } from '../../containers/index'
 import { StatusBar } from '../../containers/index'
 import './Home.scss';
 import { dialogsActions } from '../../redux/actions';
@@ -33,11 +33,12 @@ const Home = props => {
             <Divider  />
             <Messages />
             <div className="chat__dialog-input">
+              <ChatInput user={user} />
             </div>
           </div>
         ) :
         (
-          <Empty description='Начните диалог' />
+          <Empty description='Откройте диалог' />
         )}
       </div>
   </section>

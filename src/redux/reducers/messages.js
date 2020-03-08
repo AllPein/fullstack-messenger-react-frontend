@@ -11,6 +11,12 @@ export default (state = initialState, { type, payload }) => {
                 messages: payload,
                 
             };
+        case 'MESSAGES:ADD_MESSAGE':
+            return {
+                ...state,
+                messages: [...state.messages, payload],
+                
+            };    
         default: 
             return state;
     }

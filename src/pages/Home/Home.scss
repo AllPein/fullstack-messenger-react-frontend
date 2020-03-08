@@ -40,19 +40,24 @@
 
   }
 
-  &__dialog{
-    width: 100%;
-    
-  }
 
   &__dialog{
-    height: calc(100% - 95px);
+    height: 100%;
+    width: 100%;
+
     .messages{
-      height: 100%;
+      height: calc(100% - 135px);
       overflow-y: scroll;
     }
-    .messages::-webkit-scrollbar{
+    .messages::-webkit-scrollbar {
       width: 0;
+    }
+    &-input {
+      background-color: #ddd;
+      height: 60px;
+      padding-top: 10px;
+      padding: 12px 120px 15px 12px;
+   
     }
   }
 

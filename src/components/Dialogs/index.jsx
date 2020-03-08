@@ -13,6 +13,7 @@ const Dialogs = ({user, dialogs, onInputChange, inputValue, currentDialogId}) =>
           <DialogItem 
           key={item._id}
           text={item.lastMessage.text}
+          time={item.lastMessage.time}
           partner={item.partner._id == user._id ? item.author : item.partner}
           dialogId={item._id}
           currentDialogId={currentDialogId}

@@ -6,7 +6,10 @@ let actions = {
         type: 'MESSAGES:SET_DATA',
         payload: data
     }),
-
+    addMessage: (data) => ({
+        type: 'MESSAGES:ADD_MESSAGE',
+        payload: data
+    }),
     fetchMessages: (dialogId) => async dispatch => {
         try {
             if (dialogId){
@@ -18,6 +21,9 @@ let actions = {
         catch(err){
             console.log(err);
         }
+    },
+    sendMessage: ({ dialogId, userId, text, time }) =>  dispatch => {
+        messagesApi.sendMessage({ dialogId, userId, text, time });
     }
 }
 

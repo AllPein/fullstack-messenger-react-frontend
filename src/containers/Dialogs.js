@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {Dialogs} from "../components/index";
-
+import  socket  from '../socket';
 import store from '../redux/store';
 import {dialogsActions} from '../redux/actions/index';
 
@@ -23,7 +23,16 @@ const DialogsContainer = props => {
 
 
     useEffect(() => {
-        store.dispatch(dialogsActions.fetchDialogs(user._id));
+        if (user){
+            store.dispatch(dialogsActions.fetchDialogs(user._id));
+
+            socket.on("MESSAGES:NEW_MESSAGE", (data) => {
+                store.dispatch(dialogsActions.fetchDialogs(user._id));
+            })
+
+            return () => socket.removeListener('SERVER:NEW_MESSAGE');
+        }
+        
     }, [user])
 
     useEffect(() => {
