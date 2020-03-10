@@ -8,7 +8,9 @@ import {messagesActions} from '../redux/actions/index';
 const MessagesContainer = ({messages, dialogId, user}) => {
     const messagesRef = useRef(null);
     
-
+    const handleNewMessage = (data) => {
+        store.dispatch(messagesActions.addMessage(data));
+    }
 
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
@@ -19,10 +21,11 @@ const MessagesContainer = ({messages, dialogId, user}) => {
             store.dispatch(messagesActions.fetchMessages(dialogId));
         
         
-            socket.on("MESSAGES:NEW_MESSAGE", (data) => store.dispatch(messagesActions.addMessage(data)));
+            socket.on("MESSAGES:NEW_MESSAGE", handleNewMessage);
 
-            return () => socket.removeListener('SERVER:NEW_MESSAGE');
         }
+        return () =>  socket.removeListener('MESSAGES:NEW_MESSAGE', handleNewMessage); 
+
     }, [dialogId]);
 
 

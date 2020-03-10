@@ -19,7 +19,9 @@
         h2 {
             font-size: 20px;
         }
-
+        p {
+            opacity: 0.5;
+        }
         p::before{
             display: inline-block;
             content: "";
@@ -28,17 +30,25 @@
             height: 8px;
             border-radius: 30px;
             margin-right: 4px;
-            background-color: #d3d3d3;
         }
 
         &-online::before {
             background-color: #00c980 !important;
+            
+        }
+        &-online {
+                opacity: 1 !important;
+            
         }
     }
 
     &-icon {
         position: relative;
-        font-size: 30px;
-        margin: 15px 15px 0 0;
+        font-size: 20px;
+        margin: 20px 15px 0 0;
+        a {
+            text-decoration: none;
+            color: #202020;
+        }
     }
 }

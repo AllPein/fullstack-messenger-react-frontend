@@ -1,6 +1,20 @@
 $black: #202020;
 $selected: #3674ff;
 
+@mixin avatar($borderColor, $bgc){
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  content: "";
+  z-index: 99;
+  background-color: $bgc;
+  border-radius: 30px;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid $borderColor;
+}
+
 .empty-box {
   position: relative !important;
   top: 20% !important;
@@ -22,8 +36,9 @@ $selected: #3674ff;
       .ant-divider {
         display: none;
       }
+      
     }
-   
+
     &-avatar {
         position: relative;
         flex: 0 0 40px;
@@ -35,8 +50,24 @@ $selected: #3674ff;
           height: 100%;
           border-radius: 50%;
         }
-
     }
+
+    &-selected>&-avatar::before{
+      @include avatar($selected, #ddd);
+    }
+
+    &-selected>&-avatar__online::before {
+      @include avatar($selected, #00c980);
+    }
+
+    &-avatar::before {
+      @include avatar(#fff, #ddd);
+    }
+
+    &-avatar__online::before {
+      @include avatar(#fff, #00c980);
+    }
+
     &-info {
         display: flex;
         flex-direction: column;
@@ -86,20 +117,20 @@ $selected: #3674ff;
 
 .dialogItem__container:hover {
     background-color: #4d7feb6b;
+    
     color: #fff;
     cursor: pointer;
     transition: .2s;
-    .ant-divider {
-      display: none;
-    }
+    
+
+    
 }
 
+
 .dialogItem__container-selected:hover {
-  .ant-divider {
-    display: none;
-  }
   opacity: 0.9;
   transition: .5s;
   cursor: pointer;
+  
 }
 

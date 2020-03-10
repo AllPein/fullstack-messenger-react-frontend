@@ -4,13 +4,11 @@ import EmojiPicker from 'emoji-picker-react';
 
 const { TextArea } = Input;
 
-const ChatInput = ({submitForm, value, onChangeInput}) => {
+const ChatInput = ({value, onChangeInput, proceedTyping}) => {
   return (
     <Input
-    onChange={onChangeInput}
-    onKeyPress={(event) => {
-        if (event.key === "Enter") {submitForm(event)} 
-    }}
+    onChange={e => { onChangeInput(e)}}
+    onKeyDown={proceedTyping}
     placeholder="Введите текст сообщения…"
     value={value}
     

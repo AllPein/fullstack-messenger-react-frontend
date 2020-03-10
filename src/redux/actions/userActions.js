@@ -1,12 +1,16 @@
 import { showNotification }  from '../../utils';
 import { userApi } from "../../api";
-
+import socket from '../../socket';
 import axios from 'axios';
 
 const actions = {
     setUserData: (data) => ({
-            type: 'USER:SET_DATA',
-            payload: data
+        type: 'USER:SET_DATA',
+        payload: data
+    }),
+    setFoundUser: (data) => ({
+        type: 'USER:SET_FOUND_USER',
+        payload: data
     }),
     logIn: (bool) => ({
         type: 'USER:SET_AUTH',
@@ -15,7 +19,7 @@ const actions = {
     getUserData:  () => async dispatch => {
         try {
             let data = await userApi.getUserData();
-
+            localStorage.setItem("USER_ID", data.data._id);
             dispatch(actions.setUserData(data));
         }
         catch(err) {
@@ -83,6 +87,20 @@ const actions = {
             return 'error';
        } 
         
+    },
+    logOut: () => async dispatch =>{
+        localStorage.removeItem("token");
+        localStorage.removeItem("USER_ID");
+        socket.disconnect();
+
+        dispatch(actions.setUserData({data:{}}));
+        dispatch(actions.logIn(false));
+    },
+    findUser: ({email, username}) => async dispatch => {
+        let foundUser = await userApi.findUser({ email, username });
+
+        let data = foundUser.data.length > 0 ? foundUser.data[0]: null;
+        dispatch(actions.setFoundUser(data));
     }
 }
 

@@ -11,15 +11,16 @@ const DialogItem = props => {
         "marginTop": "2px",
         "marginBottom": "0px",
     }
-    const txt = user._id == id ? "Вы: " + text : text;
+    const txt = user._id == id && text != 'печатает...' ? "Вы: " + text : text;
     
   return (
     <Link to={`/im/${dialogId}`}>
         <div className={classNames('dialogItem__container', {
         'dialogItem__container-unread': unRead > 0,
-        'dialogItem__container-selected':currentDialogId == dialogId
+        'dialogItem__container-selected':currentDialogId == dialogId,
         })} >
-            <div className="dialogItem__container-avatar">
+            <div className={classNames('dialogItem__container-avatar', {
+            'dialogItem__container-avatar__online': partner.isOnline})}>
                 <Avatar
                 style={{
                     backgroundColor: partner.avatarColor,

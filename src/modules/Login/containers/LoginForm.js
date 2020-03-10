@@ -18,10 +18,10 @@ const LoginForm = withFormik({
 
         return errors;
     },
-    handleSubmit: async (values, { setSubmitting, props }) => {
+    handleSubmit:  (values, { setSubmitting, props }) => {
        setSubmitting(true);
         try {
-            let status = await store.dispatch(userActions.authUser(values));
+            let status =  store.dispatch(userActions.authUser(values));
             
             if (status == 'success') props.history.push("/");
 

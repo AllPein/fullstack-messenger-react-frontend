@@ -1,10 +1,12 @@
 import React from 'react'
 import { Avatar, Button, Divider  } from 'antd';
-import { BarsOutlined } from '@ant-design/icons';
-
+import { CloseOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import './StatusBar.scss';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import ruLocale from 'date-fns/locale/ru';
 
-const StatusBar = ({partner, isOnline}) => {
+const StatusBar = ({partner, isTyping}) => {
   return (
     <div className="status__container">
         <div className="status__container-avatar" >
@@ -20,10 +22,18 @@ const StatusBar = ({partner, isOnline}) => {
         </div>
         <div className="status__container-info">
             <h2>{partner.username}</h2>
-            <p className={isOnline ? 'status__container-info-online' : ''}>{isOnline ? "online" : "offline"}</p>
+            {!isTyping ? (
+                <p className={partner.isOnline ? 'status__container-info-online' : ''}>
+                    { partner.isOnline ? "online" : 
+                    `был в сети ${formatDistanceToNow(new Date(partner.lastSeen),  {locale: ruLocale, addSuffix: true } )}` }
+                </p>
+            ) : (
+                <p>печатает...</p>
+            )}
+            
         </div>
         <div className="status__container-icon">
-            <BarsOutlined onClick={() => {}} />
+            <Link to='/'><CloseOutlined  /></Link>
         </div>
         
     </div>

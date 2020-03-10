@@ -19,11 +19,23 @@ let actions = {
             console.log(err);
         }
     },
+    createDialog: ({ userId, partnerId, text, time }) => async dispatch => {
+        try {
+            if (userId){
+                await dialogsApi.createDialog({userId, partnerId, text, time});
+                await dispatch(actions.fetchDialogs(userId));
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    },
     setCurrentDialogId: (id) => dispatch => {
         dispatch({
             type: 'DIALOGS:SET_CURRENT_DIALOG_ID',
             payload: id,
         });
+        return id;
     }
 }
 

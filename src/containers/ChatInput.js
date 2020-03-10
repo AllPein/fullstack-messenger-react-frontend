@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { socket } from '../socket';
+import  socket  from '../socket';
 import { messagesActions } from '../redux/actions/index';
 import {ChatInput as  ChatInputBase} from "../components/index";
 
@@ -10,10 +10,21 @@ const ChatInput = ({dialogId, user}) => {
 
     const [value, setValue] = useState('');
 
-    const onChangeInput = ({ target: { value } }) => {
-        setValue(value);
+    const onChangeInput = (e) => {
+        setValue(e.target.value);
+        
     }
-    const submitForm = (e) => {
+
+    const proceedTyping = (e) => {
+        socket.emit("DIALOGS:TYPING", ({dialogId, uid: user._id}));
+
+        if (e.keyCode === 13) {
+            submitForm();
+        }
+    }
+
+    const submitForm = () => {
+        
         let data = {
             userId: user._id,
             text: value,
@@ -22,11 +33,10 @@ const ChatInput = ({dialogId, user}) => {
         }
         store.dispatch(messagesActions.sendMessage(data));
         setValue("");
-        e.preventDefault();
     }
 
     return (
-        <ChatInputBase submitForm={submitForm} onChangeInput={onChangeInput} value={value}  />
+        <ChatInputBase onChangeInput={onChangeInput} proceedTyping={proceedTyping} value={value}  />
     )
 
 }

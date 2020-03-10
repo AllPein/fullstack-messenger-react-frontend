@@ -9,8 +9,12 @@ import store from './redux/store'
 
 import './styles/index.scss';
 
-axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
-store.dispatch(userActions.getUserData());
+if (localStorage.getItem("token")){
+  axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
+  store.dispatch(userActions.getUserData());
+
+}
+
 
 ReactDOM.render(
   <Provider store={store}>

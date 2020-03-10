@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Divider, Empty } from 'antd';
+import socket from '../../socket';
 
 import { Sidebar, Messages, ChatInput } from '../../containers/index'
 import { StatusBar } from '../../containers/index'

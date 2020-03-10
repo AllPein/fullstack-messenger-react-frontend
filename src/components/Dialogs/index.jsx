@@ -2,7 +2,7 @@ import React from 'react'
 import './Dialogs.scss' 
 import { DialogItem } from "../index";
 import { Input, Empty } from 'antd';
-const Dialogs = ({user, dialogs, onInputChange, inputValue, currentDialogId}) => {
+const Dialogs = ({user, dialogs, onInputChange, inputValue, currentDialogId, isTyping, typingDialogId}) => {
 
   return (
     <div className='dialogs'>
@@ -12,7 +12,7 @@ const Dialogs = ({user, dialogs, onInputChange, inputValue, currentDialogId}) =>
           dialogs.map((item, i) => (
           <DialogItem 
           key={item._id}
-          text={item.lastMessage.text}
+          text={isTyping && typingDialogId == item._id ? 'печатает...' : item.lastMessage.text}
           time={item.lastMessage.time}
           partner={item.partner._id == user._id ? item.author : item.partner}
           dialogId={item._id}
