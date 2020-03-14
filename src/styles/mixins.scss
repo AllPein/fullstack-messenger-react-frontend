@@ -1,0 +1,23 @@
+@import './animations.scss';
+
+@mixin avatar($borderColor, $bgc){
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    content: "";
+    z-index: 99;
+    background-color: $bgc;
+    border-radius: 30px;
+    width: 13px;
+    height: 13px;
+    border: 1.5px solid $borderColor;
+}
+
+@mixin typing {
+  overflow: hidden;
+  width: 250px;
+  white-space: nowrap; 
+  letter-spacing: .1em; 
+  animation: typing .6s infinite steps(60, end);
+}

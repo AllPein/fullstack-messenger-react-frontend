@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
 .status__container {
     display: flex;
     width: 100%;
@@ -33,12 +36,14 @@
         }
 
         &-online::before {
-            background-color: #00c980 !important;
+            background-color: $online !important;
             
         }
         &-online {
-                opacity: 1 !important;
-            
+            opacity: 1 !important;
+        }
+        &-typing {
+            @include typing;
         }
     }
 
@@ -48,7 +53,7 @@
         margin: 20px 15px 0 0;
         a {
             text-decoration: none;
-            color: #202020;
+            color: $black;
         }
     }
 }

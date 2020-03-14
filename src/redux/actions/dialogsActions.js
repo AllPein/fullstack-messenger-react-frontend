@@ -1,4 +1,5 @@
 import { dialogsApi } from "../../api";
+import { showNotification } from "../../utils";
 
 
 let actions = {
@@ -19,15 +20,32 @@ let actions = {
             console.log(err);
         }
     },
+    updateIsRead: ({userId, dialogId}) => async dispatch => {
+        try {
+            if (userId){
+                dispatch({
+                    type: 'DIALOGS:UPDATE_IS_READ',
+                    payload: { userId, dialogId }
+                })
+            }
+            
+        }
+        catch(err){
+            console.log(err);
+        }
+    },
     createDialog: ({ userId, partnerId, text, time }) => async dispatch => {
         try {
             if (userId){
                 await dialogsApi.createDialog({userId, partnerId, text, time});
-                await dispatch(actions.fetchDialogs(userId));
             }
         }
         catch(err){
-            console.log(err);
+            showNotification({
+                title: 'Ошибка',
+                text: 'Такой диалог уже существует!',
+                type: 'error'
+            })
         }
     },
     setCurrentDialogId: (id) => dispatch => {

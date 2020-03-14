@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export default {
-    getMessages: (dialogId) => axios.get("http://localhost:5000/messages/" + dialogId),
+    getMessages: ({ dialogId, userId }) => axios.get(`http://localhost:5000/messages/${dialogId}/${userId}`),
     sendMessage: ({dialogId, userId, text, time}) => axios.post("http://localhost:5000/messages/" + dialogId, { userId, text, time })
 };

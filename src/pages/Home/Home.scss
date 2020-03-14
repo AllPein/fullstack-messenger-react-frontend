@@ -1,9 +1,6 @@
-.ant-divider {
-  margin: 0 !important; 
-}
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
-$black: #202020;
-$selected: #3674ff;
 
 .ant-empty {
   position: relative;
@@ -23,10 +20,13 @@ $selected: #3674ff;
     width: 340px;
     border-right: 1px solid #f7f7f7;
     margin-top: 20px;
+
+    .ant-divider {
+      margin: 11px 0 10px 0;
+    }
     &-header{
       display: flex;
       justify-content: space-between;
-      margin-bottom: 20px;
       padding-left: 10px;
       padding-right: 10px;
 
@@ -40,8 +40,11 @@ $selected: #3674ff;
       .dialogs {
         height: 100%;
         overflow-y: scroll;
-      width: 340px;
+        width: 340px;
+        span {
+          margin-bottom: 10px;
 
+        }
       }
       
       .dialogs::-webkit-scrollbar{
@@ -67,8 +70,17 @@ $selected: #3674ff;
             height: 100%;
             border-radius: 50%;
           }
+          &::before{
+            @include avatar(#fff, #ddd);
+
+          }
+          &__online::before {
+            @include avatar(#fff, $online);
+          }
   
       }
+
+        
       &-info {
           display: flex;
           flex-direction: column;
@@ -116,7 +128,9 @@ $selected: #3674ff;
   &__dialog{
     height: 100%;
     width: 100%;
-
+    .ant-divider {
+      margin: 0;
+    }
     .messages{
       height: calc(100% - 135px);
       overflow-y: scroll;
@@ -125,10 +139,8 @@ $selected: #3674ff;
       width: 0;
     }
     &-input {
-      background-color: #ddd;
-      height: 60px;
       padding-top: 10px;
-      padding: 12px 120px 15px 12px;
+      padding: 0 20px 10px 20px;
    
     }
   }

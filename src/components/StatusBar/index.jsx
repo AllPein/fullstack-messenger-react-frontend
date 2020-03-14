@@ -6,7 +6,7 @@ import './StatusBar.scss';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import ruLocale from 'date-fns/locale/ru';
 
-const StatusBar = ({partner, isTyping}) => {
+const StatusBar = ({partner, isTyping, currentDialogId, typingDialogIds}) => {
   return (
     <div className="status__container">
         <div className="status__container-avatar" >
@@ -22,13 +22,14 @@ const StatusBar = ({partner, isTyping}) => {
         </div>
         <div className="status__container-info">
             <h2>{partner.username}</h2>
-            {!isTyping ? (
+            {isTyping && typingDialogIds.indexOf(currentDialogId) != -1 ? (
+                <p className='status__container-info-typing'>печатает...</p>
+                
+            ) : (
                 <p className={partner.isOnline ? 'status__container-info-online' : ''}>
                     { partner.isOnline ? "online" : 
                     `был в сети ${formatDistanceToNow(new Date(partner.lastSeen),  {locale: ruLocale, addSuffix: true } )}` }
                 </p>
-            ) : (
-                <p>печатает...</p>
             )}
             
         </div>

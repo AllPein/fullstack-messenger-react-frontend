@@ -1,25 +1,7 @@
-$black: #202020;
-$selected: #3674ff;
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
-@mixin avatar($borderColor, $bgc){
-  display: block;
-  position: absolute;
-  bottom: -1px;
-  right: 0;
-  content: "";
-  z-index: 99;
-  background-color: $bgc;
-  border-radius: 30px;
-  width: 13px;
-  height: 13px;
-  border: 1.5px solid $borderColor;
-}
 
-.empty-box {
-  position: relative !important;
-  top: 20% !important;
-  left: 0% !important;
-}
 
 .dialogItem__container {
     display: flex;
@@ -57,7 +39,7 @@ $selected: #3674ff;
     }
 
     &-selected>&-avatar__online::before {
-      @include avatar($selected, #00c980);
+      @include avatar($selected, $online);
     }
 
     &-avatar::before {
@@ -65,7 +47,7 @@ $selected: #3674ff;
     }
 
     &-avatar__online::before {
-      @include avatar(#fff, #00c980);
+      @include avatar(#fff, $online);
     }
 
     &-info {
@@ -97,6 +79,16 @@ $selected: #3674ff;
               height: 1.4em;
               white-space: nowrap;
             }
+            &-read {
+              position: relative;
+              right: 0;
+              width: 15px;
+              height: 15px;
+            }
+            &-unread {
+              width: 10px;
+              height: 10px;
+            }
             h6 {
               background: #f56a00;
               color: #fff;
@@ -111,13 +103,18 @@ $selected: #3674ff;
               line-height: 17px;
             }
             
+            &-typing {
+              width: 250px;
+              p {
+                @include typing;
+              }
+            }
           }
     }
 }
 
 .dialogItem__container:hover {
     background-color: #4d7feb6b;
-    
     color: #fff;
     cursor: pointer;
     transition: .2s;

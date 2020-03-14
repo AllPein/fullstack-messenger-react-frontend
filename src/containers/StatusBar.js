@@ -7,24 +7,31 @@ import socket from '../socket';
 const Status = ({ currentDialogId, user, dialogs }) => {
   
   const [isTyping, setIsTyping] = useState(null);
+  const [typingDialogIds, setTypingDialogIds] = useState([]);
   let typingtimeout = null;
 
-  useEffect(() => {
-    socket.on('DIALOGS:IS_TYPING', ({dialogId, uid}) => {
-      if (uid != user._id) {
-        toggleTypingUser();
-      }
-    })
-  }, [])
-
-  const toggleTypingUser = () => {
-      setIsTyping(true);
-      clearInterval(typingtimeout);
-      typingtimeout = setTimeout(() => {
-        setIsTyping(false);
-      }, 500);
+  const handleTypingUser = (dialogId) => {
+    setTypingDialogIds([...typingDialogIds, dialogId]);
+    setIsTyping(true);
+    clearInterval(typingtimeout);
+    typingtimeout = setTimeout(() => {
+      setIsTyping(false);
+      setTypingDialogIds([]);
+    }, 500);
     
   }
+  
+  useEffect(() => {
+    socket.on('DIALOGS:IS_TYPING', ({dialogId, uid}) => {
+      if (uid !== user._id) {
+        handleTypingUser(dialogId);
+      }
+    })
+
+    return () => socket.removeEventListener('DIALOGS:IS_TYPING'); 
+  }, [user])
+
+  
 
   if (!dialogs.length || !currentDialogId) {
     return null;
@@ -43,7 +50,7 @@ const Status = ({ currentDialogId, user, dialogs }) => {
     partner = currentDialog.author;
   }
 
-  return <StatusBar partner={partner}  isTyping={isTyping} />;
+  return <StatusBar partner={partner}  isTyping={isTyping} typingDialogIds={typingDialogIds} currentDialogId={currentDialogId} />;
 };
 
 export default connect(({ dialogs, user }) => ({

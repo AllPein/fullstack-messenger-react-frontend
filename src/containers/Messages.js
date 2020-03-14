@@ -6,31 +6,53 @@ import socket from '../socket';
 import {messagesActions} from '../redux/actions/index';
 
 const MessagesContainer = ({messages, dialogId, user}) => {
+    const [isLoading, setisLoading] = useState(false);
     const messagesRef = useRef(null);
     
     const handleNewMessage = (data) => {
+        if (dialogId === data.dialogId) {
+            socket.emit('MESSAGES:UPDATE_READ', ({ dialogId: data.dialogId, userId: user._id }));
+        }
         store.dispatch(messagesActions.addMessage(data));
     }
+
+    const updateIsRead = ({userId, dialogId}) => {
+        store.dispatch(messagesActions.updateIsRead({userId, dialogId}));
+    } 
 
     useEffect(() => {
         messagesRef.current.scrollTo(0, 999999);
     }, [messages]);
 
     useEffect(() => {
-        if (dialogId) {
-            store.dispatch(messagesActions.fetchMessages(dialogId));
-        
-        
+        if (dialogId && user) {
+            async function fetchData(){
+                setisLoading(true);
+                await store.dispatch(messagesActions.fetchMessages({dialogId, userId: localStorage.getItem("USER_ID")}));
+                await setisLoading(false);
+                await messagesRef.current.scrollTo(0, 999999);
+            }
+            
+            fetchData();
             socket.on("MESSAGES:NEW_MESSAGE", handleNewMessage);
 
+            socket.on("MESSAGES:UPDATE_IS_READ", updateIsRead);
         }
-        return () =>  socket.removeListener('MESSAGES:NEW_MESSAGE', handleNewMessage); 
+        
+        return () =>  {
+            socket.removeListener('MESSAGES:NEW_MESSAGE', handleNewMessage); 
+        }
 
-    }, [dialogId]);
+    }, [dialogId, user]);
 
 
     return (
-        <Messages messages={messages} messagesRef={messagesRef} user={user} />
+        <Messages 
+        messages={messages}
+        messagesRef={messagesRef} 
+        user={user}
+        isLoading={isLoading} 
+        />
     )
 }
 

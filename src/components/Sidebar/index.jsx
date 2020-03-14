@@ -1,8 +1,12 @@
 import React from 'react'
-import { Button, Input, Modal, Avatar } from 'antd';
+import { Button, Input, Modal, Avatar, Divider } from 'antd';
+
+import  classNames  from 'classnames';
 import {Dialogs} from '../../containers/index';
 import { FormOutlined, SearchOutlined } from '@ant-design/icons';
 import './Sidebar.scss';
+
+
 
 const { TextArea } = Input;
 
@@ -13,9 +17,10 @@ const Sidebar = ({user, isVisible, setIsVisible, findUser, foundUser, sendFirstM
         <h1>Список диалогов </h1>
         <FormOutlined onClick={() => setIsVisible(true)} />
       </div>
+      <Divider />
       <div className="chat__sidebar-dialogs">
-        <Dialogs user={user} />
-        <Button block onClick={signOut}>Выйти</Button>
+        <Dialogs user={user} setIsVisible={setIsVisible} />
+        <Button block ghost type='primary' onClick={signOut}>Выйти</Button>
       </div>
 
       <div className="chat__sidebar-modal">
@@ -23,7 +28,7 @@ const Sidebar = ({user, isVisible, setIsVisible, findUser, foundUser, sendFirstM
         <Modal
         title="Создать диалог" 
         visible={isVisible} 
-        onOk={() => setIsVisible(false)}
+        footer={null}
         onCancel={() => setIsVisible(false)}
         >
           <h3>Введите имя пользователя или e-mail собеседника</h3>
@@ -41,7 +46,10 @@ const Sidebar = ({user, isVisible, setIsVisible, findUser, foundUser, sendFirstM
           (
             <div>
               <div className="chat__sidebar-container">
-                <div className="chat__sidebar-container-avatar">
+                <div className={classNames("chat__sidebar-container-avatar", {
+                  "chat__sidebar-container-avatar__online": foundUser.isOnline
+                }
+                )}>
                     <Avatar
                     style={{
                         backgroundColor: foundUser.avatarColor,

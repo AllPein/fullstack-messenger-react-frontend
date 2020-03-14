@@ -10,10 +10,11 @@ let actions = {
         type: 'MESSAGES:ADD_MESSAGE',
         payload: data
     }),
-    fetchMessages: (dialogId) => async dispatch => {
+    fetchMessages: ({ dialogId, userId }) => async dispatch => {
         try {
-            if (dialogId){
-                let data = await messagesApi.getMessages(dialogId);
+            if (dialogId ){
+
+                let data = await messagesApi.getMessages({ dialogId, userId });
                 dispatch(actions.setMessages(data.data));
             }
             
@@ -24,6 +25,20 @@ let actions = {
     },
     sendMessage: ({ dialogId, userId, text, time }) =>  dispatch => {
         messagesApi.sendMessage({ dialogId, userId, text, time });
+    },
+    updateIsRead: ({userId, dialogId}) => async dispatch => {
+        try {
+            if (userId){
+                dispatch({
+                    type: 'MESSAGES:UPDATE_IS_READ',
+                    payload: { userId, dialogId }
+                })
+            }
+            
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 }
 

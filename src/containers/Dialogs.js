@@ -7,13 +7,15 @@ import {dialogsActions} from '../redux/actions/index';
 
 const DialogsContainer = props => {
 
-    const {dialogs, user, currentDialogId} = props;
+    const {dialogs, user, currentDialogId, setIsVisible} = props;
 
     const [filteredDialogs, setFilteredDialogs] = useState(Array.from(dialogs));
     const [inputVal, setInputVal] = useState('');
     const [isTyping, setIsTyping] = useState(null);
-    const [typingDialogId, setTypingDialogId] = useState(null);
+    const [typingDialogIds, setTypingDialogIds] = useState([]);
     let typingtimeout = null;
+
+    let isEmpty = dialogs.length == 0;
 
     const onInputChange = (value = "") => {
         if (dialogs.length > 0)
@@ -24,15 +26,20 @@ const DialogsContainer = props => {
         setInputVal(value);
     }
 
-    const toggleTypingUser = (dialogId) => {
-        setTypingDialogId(dialogId);
+    const handleTypingUser = (dialogId) => {
+        setTypingDialogIds([...typingDialogIds, dialogId]);
         setIsTyping(true);
         clearInterval(typingtimeout);
         typingtimeout = setTimeout(() => {
           setIsTyping(false);
+          setTypingDialogIds([]);
         }, 500);
       
     }
+
+    const updateIsRead = ({userId, dialogId}) => {
+        store.dispatch(dialogsActions.updateIsRead({userId, dialogId}));
+    } 
 
     useEffect(() => {
         if (user){
@@ -42,11 +49,24 @@ const DialogsContainer = props => {
                 store.dispatch(dialogsActions.fetchDialogs(user._id));
             })
 
+            socket.on("DIALOGS:DIALOG_CREATED", () => {
+                store.dispatch(dialogsActions.fetchDialogs(user._id));
+            })
+
             socket.on('DIALOGS:IS_TYPING', ({uid, dialogId}) => {
-                if (uid != user._id) {
-                  toggleTypingUser(dialogId);
-                }
-              })   
+                
+                handleTypingUser(dialogId);
+            })
+            
+            socket.on("MESSAGES:UPDATE_IS_READ", updateIsRead);
+
+        }
+
+        return () =>  {
+            socket.removeListener('MESSAGES:NEW_MESSAGE');
+            socket.removeListener('DIALOGS:DIALOG_CREATED');
+            socket.removeListener('DIALOGS:IS_TYPING'); 
+            socket.removeListener("MESSAGES:UPDATE_IS_READ", updateIsRead);
         }
     }, [user])
 
@@ -56,8 +76,10 @@ const DialogsContainer = props => {
 
 
     return (
-        <Dialogs 
-        typingDialogId={typingDialogId}
+        <Dialogs
+        setIsVisible={setIsVisible}
+        isEmpty={isEmpty} 
+        typingDialogIds={typingDialogIds}
         onInputChange={onInputChange}
         dialogs={filteredDialogs}
         inputValue={inputVal}

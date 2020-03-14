@@ -1,14 +1,14 @@
 import React from 'react'
 import { Avatar } from 'antd';
 import classNames from 'classnames';
-
+import { ReadIcon } from '../index';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import ruLocale from 'date-fns/locale/ru';
 
 
 import './Message.scss';
 
-const Message = ({ isMe, text,  time, user}) => {
+const Message = ({ isMe, text,  time, user, isRead }) => {
   return (
     <div className={classNames('message__container', {
     'message__container-isme' : isMe
@@ -30,6 +30,7 @@ const Message = ({ isMe, text,  time, user}) => {
                     <p>{  text }</p>
                 </div>
                 <div className="message__container-content__info-time">
+                    <ReadIcon isMe={isMe} isRead={isRead} color='b' />
                     <span>{ formatDistanceToNow(new Date(time),  {locale: ruLocale, addSuffix: true } ) }</span>
                 </div>
             </div>

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import store from '../redux/store';
 import { userActions, dialogsActions } from '../redux/actions/index';
 import { Sidebar } from "../components/index";
-import socket from '../socket';
 
 const SidebarContainer = props => {
     const { user, foundUser } = props; 
