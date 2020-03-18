@@ -8,9 +8,7 @@
     flex-direction: row;
     color: $black;
     padding: 5px 0 0 0;
-    &-unread {
-        background-color: #fff2e8;
-    }
+    
     &-selected{
       background-color: $selected;
       color: #fff !important;
@@ -90,7 +88,7 @@
               height: 10px;
             }
             h6 {
-              background: #f56a00;
+              background: $selected;
               color: #fff;
               font-weight: bold;
               width: 100%;
@@ -114,12 +112,10 @@
 }
 
 .dialogItem__container:hover {
-    background-color: #4d7feb6b;
+    background-color: $hoverColor;
     color: #fff;
     cursor: pointer;
     transition: .2s;
-    
-
     
 }
 

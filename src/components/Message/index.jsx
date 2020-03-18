@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar } from 'antd';
+import { Avatar, Popover, Button} from 'antd';
 import classNames from 'classnames';
 import { ReadIcon } from '../index';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
@@ -8,11 +8,15 @@ import ruLocale from 'date-fns/locale/ru';
 
 import './Message.scss';
 
-const Message = ({ isMe, text,  time, user, isRead }) => {
+const Message = ({ isMe, text,  time, user, isRead, deleteMessage }) => {
   return (
     <div className={classNames('message__container', {
     'message__container-isme' : isMe
     })}>
+        <Popover
+          placement={!isMe ? "topLeft" : "topRight"}
+          content={<Button disabled={!isMe} onClick={deleteMessage}>Удалить сообщение</Button>}
+          trigger="click">
         <div className="message__container-content">
             <div className='message__container-content__avatar'>
                 <Avatar
@@ -35,7 +39,7 @@ const Message = ({ isMe, text,  time, user, isRead }) => {
                 </div>
             </div>
         </div>
-        
+        </Popover>
     </div>
   )
 }

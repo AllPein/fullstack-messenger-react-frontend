@@ -14,6 +14,7 @@ const Dialogs = ({user, dialogs, onInputChange, inputValue, currentDialogId, isT
           key={item._id}
           text={item.lastMessage.text}
           isRead={item.lastMessage.isRead}
+          unRead={item.count[user._id]}
           isTyping={isTyping && typingDialogIds.indexOf(item._id) !== -1}
           time={item.lastMessage.time}
           partner={item.partner._id === user._id ? item.author : item.partner}

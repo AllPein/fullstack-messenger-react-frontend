@@ -16,7 +16,6 @@
         &__info{
             margin-left: 10px;
             max-width: inherit;
-            text-align: center;
             min-width: 40px;
             text-align: left;
             &-text{
@@ -39,7 +38,6 @@
                 }
                 div {
                     opacity: 1;
-                    margin-right: 10px;
                 }
             }
         }
@@ -64,14 +62,17 @@
                 &-text{
                     background: $selected;
                     color: #fff;
+                    
                     box-shadow: 0px 5px 5px rgba(54, 116, 255, 0.196733);
                     border-radius: 12px 12px 0px 12px;
-                    padding: 15px;
                     margin-bottom: 8px;
                 }
                 &-time{
                     text-align: right;
-                    margin-right: 10px;
+                    div{
+                        margin-right: 10px;
+
+                    }
                 }
             }
 

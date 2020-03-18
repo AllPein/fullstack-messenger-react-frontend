@@ -26,6 +26,10 @@ const DialogsContainer = props => {
         setInputVal(value);
     }
 
+    const handleDeletedMessage = (data) => {
+        store.dispatch(dialogsActions.fetchDialogs(user._id ));
+    }
+
     const handleTypingUser = (dialogId) => {
         setTypingDialogIds([...typingDialogIds, dialogId]);
         setIsTyping(true);
@@ -52,7 +56,8 @@ const DialogsContainer = props => {
             socket.on("DIALOGS:DIALOG_CREATED", () => {
                 store.dispatch(dialogsActions.fetchDialogs(user._id));
             })
-
+            socket.on("MESSAGES:MESSAGE_DELETED", handleDeletedMessage);
+            socket.on("DIALOGS:DIALOG_DELETED", handleDeletedMessage);
             socket.on('DIALOGS:IS_TYPING', ({uid, dialogId}) => {
                 
                 handleTypingUser(dialogId);
@@ -65,6 +70,7 @@ const DialogsContainer = props => {
         return () =>  {
             socket.removeListener('MESSAGES:NEW_MESSAGE');
             socket.removeListener('DIALOGS:DIALOG_CREATED');
+            socket.removeListener("MESSAGES:MESSAGE_DELETED", handleDeletedMessage); 
             socket.removeListener('DIALOGS:IS_TYPING'); 
             socket.removeListener("MESSAGES:UPDATE_IS_READ", updateIsRead);
         }

@@ -52,6 +52,7 @@ const DialogItem = props => {
                     <ReadIcon 
                     isRead={isRead}
                     isMe={isMe}
+                    unRead={unRead}
                     color={isSelected ? 'w' : 'b'}
                     />
                 </div>

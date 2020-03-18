@@ -20,7 +20,7 @@ export default (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 dialogs: state.dialogs.map((dialog) => {
-                    if (dialog._id === payload.dialogId) {
+                    if (dialog._id === payload.dialogId && payload.userId !== dialog.lastMessage.user._id) {
                         dialog.lastMessage.isRead = true;
                     }
                     return dialog;

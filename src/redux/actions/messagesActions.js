@@ -26,19 +26,17 @@ let actions = {
     sendMessage: ({ dialogId, userId, text, time }) =>  dispatch => {
         messagesApi.sendMessage({ dialogId, userId, text, time });
     },
-    updateIsRead: ({userId, dialogId}) => async dispatch => {
-        try {
-            if (userId){
-                dispatch({
-                    type: 'MESSAGES:UPDATE_IS_READ',
-                    payload: { userId, dialogId }
-                })
-            }
-            
+    deleteMessage: (messageId) => async dispatch => {
+        messagesApi.deleteMessage(messageId);
+    },
+    updateIsRead: ({userId, dialogId}) => dispatch => {
+        if (userId){
+            dispatch({
+                type: 'MESSAGES:UPDATE_IS_READ',
+                payload: { userId, dialogId }
+            })
         }
-        catch(err){
-            console.log(err);
-        }
+        
     }
 }
 

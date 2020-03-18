@@ -5,7 +5,7 @@ import SentWhiteSvg from '../../assets/SentWhite.svg';
 import SentBlueSvg from '../../assets/SentBlue.svg';
 
 
-const ReadIcon = ({isMe, isRead, color}) => {
+const ReadIcon = ({isMe, isRead, color, unRead}) => {
   return (
     <div>
         { isMe && isRead ? (
@@ -14,6 +14,10 @@ const ReadIcon = ({isMe, isRead, color}) => {
           isMe &&
           <img className='dialogItem__container-info__bottom-unread'  src={color === 'w' ? SentWhiteSvg : SentBlueSvg} alt=""/>
         )
+        }
+        {
+          !isMe && unRead > 0 &&
+          <h6>{unRead}</h6>
         }
     </div>
   )

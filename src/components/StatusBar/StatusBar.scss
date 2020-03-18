@@ -43,7 +43,10 @@
             opacity: 1 !important;
         }
         &-typing {
-            @include typing;
+            p{
+                @include typing;
+
+            }
         }
     }
 

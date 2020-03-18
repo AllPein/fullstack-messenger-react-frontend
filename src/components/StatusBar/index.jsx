@@ -23,7 +23,7 @@ const StatusBar = ({partner, isTyping, currentDialogId, typingDialogIds}) => {
         <div className="status__container-info">
             <h2>{partner.username}</h2>
             {isTyping && typingDialogIds.indexOf(currentDialogId) != -1 ? (
-                <p className='status__container-info-typing'>печатает...</p>
+                <div className='status__container-info-typing'><p>печатает...</p></div>
                 
             ) : (
                 <p className={partner.isOnline ? 'status__container-info-online' : ''}>

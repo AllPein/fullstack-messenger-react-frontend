@@ -3,7 +3,7 @@ import { Message } from '../index';
 import { Spin } from 'antd';
 
 import './Messages.scss'
-const Messages = ({ messages, messagesRef, user, isLoading }) => {
+const Messages = ({ messages, messagesRef, user, isLoading, deleteMessage }) => {
   return (
     <div ref={messagesRef} className='messages'>
        {isLoading ? <Spin className='messages-loading' /> :
@@ -15,6 +15,7 @@ const Messages = ({ messages, messagesRef, user, isLoading }) => {
             user={message.user}
             time={message.time}
             isRead={message.isRead}
+            deleteMessage={deleteMessage.bind(this, message._id)}
             />
         ))
        }
