@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {Dialogs} from "../components/index";
 import  socket  from '../socket';
 import store from '../redux/store';
@@ -26,10 +27,14 @@ const DialogsContainer = props => {
         setInputVal(value);
     }
 
-    const handleDeletedMessage = (data) => {
+    const handleDeletedDialog= ({dialogId}) => {
+        props.history.push('/');
+        store.dispatch(dialogsActions.setCurrentDialogId(null));
         store.dispatch(dialogsActions.fetchDialogs(user._id ));
     }
-
+    const handleDeletedMessage = ({dialogId}) => {
+        store.dispatch(dialogsActions.fetchDialogs(user._id ));
+    }
     const handleTypingUser = (dialogId) => {
         setTypingDialogIds([...typingDialogIds, dialogId]);
         setIsTyping(true);
@@ -57,7 +62,7 @@ const DialogsContainer = props => {
                 store.dispatch(dialogsActions.fetchDialogs(user._id));
             })
             socket.on("MESSAGES:MESSAGE_DELETED", handleDeletedMessage);
-            socket.on("DIALOGS:DIALOG_DELETED", handleDeletedMessage);
+            socket.on("DIALOGS:DIALOG_DELETED", handleDeletedDialog);
             socket.on('DIALOGS:IS_TYPING', ({uid, dialogId}) => {
                 
                 handleTypingUser(dialogId);
@@ -72,6 +77,7 @@ const DialogsContainer = props => {
             socket.removeListener('DIALOGS:DIALOG_CREATED');
             socket.removeListener("MESSAGES:MESSAGE_DELETED", handleDeletedMessage); 
             socket.removeListener('DIALOGS:IS_TYPING'); 
+            socket.removeEventListener("DIALOGS:DIALOG_DELETED", handleDeletedDialog);
             socket.removeListener("MESSAGES:UPDATE_IS_READ", updateIsRead);
         }
     }, [user])
@@ -96,4 +102,4 @@ const DialogsContainer = props => {
     )
 }
 
-export default connect(state => ({dialogs: state.dialogs.dialogs, currentDialogId: state.dialogs.currentDialogId}))(DialogsContainer);
+export default withRouter(connect(state => ({dialogs: state.dialogs.dialogs, currentDialogId: state.dialogs.currentDialogId}))(DialogsContainer));

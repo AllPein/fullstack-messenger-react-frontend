@@ -8,7 +8,7 @@ const Register = props => {
     touched,
     errors,
     handleChange,
-    handleBlur,
+    validate,
     handleSubmit,
     isValid,
     isSubmitting
@@ -21,16 +21,21 @@ const Register = props => {
     </div>
     <div>
         <Form onSubmit={handleSubmit} className="login-form">
-            <Form.Item >
+            <Form.Item hasFeedback>
+                {errors.email? (
+                  <div style={{ color: "red" }}>{errors.email}</div>
+                ) : null}
                 <Input
                 name="email"
                 icon="mail"
                 size='large'
                 placeholder="E-Mail"
+                validate={validate}
                 onChange={handleChange}
                 errors={errors}
                 value={values.email}
                 />
+                
             </Form.Item >
           
             <Form.Item>
@@ -40,7 +45,6 @@ const Register = props => {
                 size='large'
                 placeholder="Логин"
                 onChange={handleChange}
-                handleBlur={handleBlur}
                 touched={touched}
                 errors={errors}
                 value={values.username}
@@ -48,18 +52,21 @@ const Register = props => {
             </Form.Item>
           
             <Form.Item>
-            <Input
-            name="password"
-            icon="lock"
-            size='large'
-            placeholder="Пароль"
-            type="password"
-            onChange={handleChange}
-            handleBlur={handleBlur}
-            touched={touched}
-            errors={errors}
-            value={values.password}
-          />
+            {errors.password? (
+                  <div style={{ color: "red" }}>{errors.password}</div>
+                ) : null}
+              <Input.Password
+              name="password"
+              icon="lock"
+              size='large'
+              placeholder="Пароль"
+              type="password"
+              onChange={handleChange}
+              touched={touched}
+              errors={errors}
+              value={values.password}
+              />
+              
             </Form.Item>
 
           <Form.Item>

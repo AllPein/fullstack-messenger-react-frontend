@@ -41,7 +41,8 @@ const actions = {
                 text: 'Вы авторизировались!',
                 type: 'success'
             })
-    
+            
+            socket.connect();
             dispatch(actions.getUserData());
             dispatch(actions.logIn(true));
 
@@ -65,12 +66,7 @@ const actions = {
     
             localStorage.setItem("token", token);
             axios.defaults.headers.common['Authorization'] = token;
-            showNotification({
-                title: 'Успешно',
-                text: 'Вы зарегистрировались!',
-                type: 'success'
-            })
-
+            
             dispatch(actions.authUser({ email: userData.email, password: userData.password }));
             dispatch(actions.logIn(true));
 
