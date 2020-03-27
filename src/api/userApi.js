@@ -2,8 +2,8 @@ import axios from 'axios';
 
 
 export default {
-    login: (userData) => axios.post("http://localhost:5000/users/login", userData),
-    register: (userData) => axios.post("http://localhost:5000/users/register", userData),
-    getUserData: () => axios.get('http://localhost:5000/users/userinfo'),
-    findUser: ({email, username}) => axios.post('http://localhost:5000/users/', { email, username })
+    login: (userData) => axios.post("https://react-messenger-backend.herokuapp.com/users/login", userData),
+    register: (userData) => axios.post("https://react-messenger-backend.herokuapp.com/users/register", userData),
+    getUserData: () => axios.get('https://react-messenger-backend.herokuapp.com/users/userinfo'),
+    findUser: ({email, username}) => axios.post('https://react-messenger-backend.herokuapp.com/users/', { email, username })
 };
