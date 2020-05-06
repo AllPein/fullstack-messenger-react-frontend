@@ -16,9 +16,9 @@ const MessagesContainer = ({messages, dialogId, user}) => {
     const handleNewMessage = (data) => {
         if (dialogId === data.dialogId) {
             socket.emit('MESSAGES:UPDATE_READ', ({ dialogId: data.dialogId, userId: user._id }));
-            
+            store.dispatch(messagesActions.addMessage(data));
         }
-        store.dispatch(messagesActions.addMessage(data));
+        
     }
     const handleDeletedMessage = ({dialogId}) => {
         store.dispatch(messagesActions.fetchMessages({ dialogId, userId: user._id }));
