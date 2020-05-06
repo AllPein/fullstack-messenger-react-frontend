@@ -18,7 +18,7 @@ if (localStorage.getItem("token")){
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router basename="/">
       <App />
     </Router>
   </Provider>,
