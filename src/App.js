@@ -17,7 +17,7 @@ const App = props => {
             render={() => (!loggedIn ? <Auth /> : <Redirect to="/" />)}
           />
           <Route
-            path="/"
+            path={["/", "/im/:id"]}
             render={() => (loggedIn ? <Home /> : <Redirect to="/login" />)}
           />
         </Switch>
