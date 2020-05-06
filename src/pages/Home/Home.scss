@@ -36,8 +36,10 @@
       }
     }
     &-dialogs{
+      
       height: calc(100% - 95px);
       .dialogs {
+        scrollbar-width: none;
         height: 100%;
         overflow-y: scroll;
         width: 340px;
